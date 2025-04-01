@@ -25,15 +25,13 @@ contract OurTokenTest is Test {
     }
 
     function testBobBalance() public view {
-        // This test is so suspicious, I hate it.
-        // check it again
         assertEq(STARTING_BALANCE, ourToken.balanceOf(bob));
     }
 
     function testAllowancesWork() public {
         uint256 initialAllowance = 1000;
 
-        // Bob approves Alice to spend 1000 tokens.
+       
         vm.prank(bob);
         ourToken.approve(alice, initialAllowance);
 
@@ -48,11 +46,9 @@ contract OurTokenTest is Test {
         uint256 initialAllowance = 500;
         uint256 decreaseAmount = 1000;
 
-        // Alice approves Bob to spend tokens on her behalf
         vm.prank(alice);
         ourToken.approve(bob, initialAllowance);
 
-        // Alice tries to decrease the allowance below zero
         vm.prank(alice);
         vm.expectRevert();
         ourToken.transfer(bob, decreaseAmount);
